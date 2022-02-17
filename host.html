@@ -13,20 +13,19 @@
             cursor: pointer;
         }
     </style>
-    <form method = "post">
-        <button id = "mybtn" class="butt"> Your Next Number is: </button>
-        <p id="myarrs"></p>
+    <!-- <form action="hostdb.php" method="POST"> -->
+    <form action="hostdb.php" method="POST">
+        <!-- <button id = "mybtn" class="butt" onclick="newnumber()"> Your Next Number is: </button> -->
+        <button id = "mybtn"  class="butt" name = "btn" onclick="newnumber()"> Your Next Number is: </button>
+        <input type = "hidden" name = "backval" id = "backval" value = ""/>
     </form>
     
-      
-    <!-- <p id="rand"></p>
-    <script>
-    setInterval(randomNumber,3000);
-
-    function randomNumber(){
-        document.getElementById("rand").innerHTML = Math.floor(Math.random() * 25);
-    }
-</script> -->
+    <p id="myarrs"></p>
+    <br/>
+    <p id="number"></p>
+    <br>
+    <p id="history">Number history: </p>
+    
     <script>
         function shuffle(array) 
         {
@@ -47,43 +46,32 @@
         var arr = [1, 2 ,3 ,4 ,5 ,6 ,7 ,8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
         shuffle(arr);
         
-        // console.log(arr);
-        if(localStorage.getItem('random')=== null){
-            localStorage.setItem('random', arr);
-            localStorage.setItem('key', 0);
-        }else
-        {
-            index = index + 1;
-            var storedarr = localStorage.getItem('random');
-            console.log(storedarr);
-            var index = localStorage.getItem('key');
-            console.log(index);
-            localStorage.setItem('key', index+1);
-            console.log(storedarr[index], index);
-        }
 
-        document.write(storedarr);
-
-        // var arrs = document.getElementById("myarrs");
-        // var btn = document.getElementById("mybtn");
-        // btn.addEventListener("click", changeText);
-        // arrs.innerHTML = arr[0];
-
-        // function changeText(){
-        //     var storedarr = arr.innerHTML;
-        //     var index = arr.indexOf(storedarr)+1;
-        //     if (index == arr.length)index=0;
-        //     var result = arr[index];
-        //     arrs.innerHTML = result;
-        //     return;
-        // }
-
-        // var storedarr = localStorage.getItem('random');
-        // var shifted = storedarr.shift();
-
-        // console.log(shifted);
+        function newnumber(){
+                var randomArr = arr;//localStorage.getItem("randomarray");
+                if(!localStorage.getItem("index"))
+                {
+                    localStorage.setItem("index", 0);
+                    document.getElementById("history").innerHTML+=randomArr[0]+", ";
+                    document.getElementById("number").innerHTML="Your next number is "+randomArr[0];
+                    document.getElementById("backval").value = randomArr[0];
+                } else{
+                    var index = parseInt(localStorage.getItem("index"));
+                    index+=1;
+                    if(index<=arr.length-1){
+                        //alert("index is: "+index);
+                        localStorage.setItem("index",index);
+                        document.getElementById("history").innerHTML+=randomArr[index]+", ";
+                        document.getElementById("number").innerHTML="Your next number is "+randomArr[index];
+                        document.getElementById("backval").value = randomArr[index];
+                    } else{
+                        alert("all numbers have been generated");
+                    }
+                }
+            }            
+        
+        document.write("Randomized array:"+arr);
 
     </script>
 
 </html>
-    
