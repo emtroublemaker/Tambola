@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+table{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        width: 50%;
+        height: 50%;
+    }
+  #tag{
+    background-color: red;
+    }
+
+    .myTable{
+      display: none;
+    }
+</style>
+</head>
+<!-- <form method="POST" action = "table.php"> -->
+<form method="POST" action = "table.php">
+  <!-- <input type ="button" name="showbtn" onclick="myFunction()" value="Show ticket"/><br><br>
+  <input type ="submit" name="submitbtn" value="send to db ticket"/><br><br> -->
+  <input type ="submit" onsubmit="return False" name="submitbtn" value="generate and send" onclick="myFunction()"/><br><br>
+  <input type="hidden" id="array_data" name = "array_data"/>
+  <input type="hidden" id="inuse_array_data" name = "inuse_array_data"/>
+  <!-- <label>
+      Show ticket of this id :
+  </label>
+  <input type ="text" name="id_label" value=""/><br><br>
+  <input type ="submit" name="returnbtn" value="show ticket"/><br><br> -->
+</form>
+<script>
+function myFunction() {
+  var table = document.getElementById("myTable");
+
+  abc = [];
+  inuse_arr = [];
+
+  //To generate non-repeating array of 25 elements
+  while(abc.length < 25){
+      var r = Math.floor(Math.random() * 25) + 1;
+      if(abc.indexOf(r) === -1){
+        abc.push(r);
+        inuse_arr.push(0);
+      }
+  }
+
+  // send original array
+  var s = document.getElementById("array_data");
+  t = document.getElementById("inuse_array_data");
+  s.value = (abc);
+  t.value = (inuse_arr);
+
+
+  document.getElementById("0").innerHTML = abc[0];
+  document.getElementById("1").innerHTML = abc[1];
+  document.getElementById("2").innerHTML = abc[2];
+  document.getElementById("3").innerHTML = abc[3];
+  document.getElementById("4").innerHTML = abc[4];
+
+  document.getElementById("5").innerHTML = abc[5];
+  document.getElementById("6").innerHTML = abc[6];
+  document.getElementById("7").innerHTML = abc[7];
+  document.getElementById("8").innerHTML = abc[8];
+  document.getElementById("9").innerHTML = abc[9];
+
+  document.getElementById("10").innerHTML = abc[10];
+  document.getElementById("11").innerHTML = abc[11];
+  document.getElementById("12").innerHTML = abc[12];
+  document.getElementById("13").innerHTML = abc[13];
+  document.getElementById("14").innerHTML = abc[14];
+
+  document.getElementById("15").innerHTML = abc[15];
+  document.getElementById("16").innerHTML = abc[16];
+  document.getElementById("17").innerHTML = abc[17];
+  document.getElementById("18").innerHTML = abc[18];
+  document.getElementById("19").innerHTML = abc[19];
+
+  document.getElementById("20").innerHTML = abc[20];
+  document.getElementById("21").innerHTML = abc[21];
+  document.getElementById("22").innerHTML = abc[22];
+  document.getElementById("23").innerHTML = abc[23];
+  document.getElementById("24").innerHTML = abc[24];
+
+  console.log(abc);
+  console.log(inuse_arr);
+  
+
+  document.getElementById("myTable").style.display = "inline" ;
+}
+
+function changeColor(elem, elemId){
+  var element = document.getElementById(elem);
+  elem.style.backgroundColor ="lightblue";
+  inuse_arr.splice(elemId, 1, abc[elemId]);
+  // console.log(inuse_arr, elem, elemId);
+  console.log(inuse_arr);
+  t.value = (inuse_arr);
+}
+
+
+
+
+</script>
+<body> 
+<table id="myTable" class="myTable">
+  <tr>
+    <!-- <td id = "cell00"><div style ="background-color: #ffff00;"type="button" onload="myFunction()" onclick="changeColor()">Click</div></td> -->
+    <!-- <td id = "cell00"><div style ="background-color: #ffff00;"type="button"  onclick="myFunction()">Click Me</div></td> -->
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "0">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "1">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "2">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "3">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "4">cell</div></td>
+  </tr>
+  <tr>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "5">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "6">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "7">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "8">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "9">cell</div></td>
+  </tr>
+  <tr>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "10">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "11">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "12">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "13">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "14">cell</div></td>
+  </tr>
+  <tr>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "15">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "16">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "17">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "18">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "19">cell</div></td>
+  </tr>
+  <tr>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "20">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "21">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "22">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "23">cell</div></td>
+    <td><div style ="background-color: #ffff00;" type="button"  onclick="changeColor(this, this.id)" id = "24">cell</div></td>
+  </tr>
+</table>
+</form>
+<br> 
+
+</div>
+
+</body>
+</html>
