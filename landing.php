@@ -21,12 +21,24 @@ echo "<br>";
 $slot = 0 ;
 $backval = 0;
 
-if(isset($_POST['btn']))
-    $slot = $_POST['slots'];
-    // echo $slot;
-    $backval = $_POST['backval'];
+// if(isset($_POST['btn']))
+//     $slot = $_POST['slots'];
+//     // echo $slot;
+//     $backval = $_POST['backval'];
+//     // echo $backval;
 
-    $sql = "UPDATE `history` SET $slot = $backval WHERE $slot = 0 ORDER BY $slot DESC LIMIT 1";
+
+    $option = isset($_POST['slots'])? $_POST['slots']:false;
+    if ($option){
+        echo htmlentities($_POST['slots'], ENT_QUOTES, "UTF-8");
+    }
+    else{
+        echo "is required";
+        exit;
+    }
+
+    // $sql = "UPDATE `history` SET $slot = $backval WHERE $slot = 0 ORDER BY $slot DESC LIMIT 1";
+    $sql = "INSERT INTO `host_table`(`gen_by_host`) VALUES ('backval')";
     // echo '<script>console.log($backval)</script>';
     if(mysqli_query($conn,$sql)){
     };
@@ -37,7 +49,7 @@ if(isset($_POST['btn']))
         <title>Start Page</title>
     </head>
     <style>
-        .butt{
+        .butt{  
             border: none;
             color: rgb(10, 9, 9);
             padding: 15px 32px;
@@ -63,12 +75,18 @@ if(isset($_POST['btn']))
                 <option value="slot221">Slot7</option>
                 <option value="slot222">Slot8</option>
             </select>
-            <input type = "hidden"/>
+            <input type = "submit" name="submit"/>
             <br><br>
 
-            
+            <p id="myarrs"></p>
+            <br/>
+            <p id="number"></p>
+            <br>
+            <p id="history">Number history: </p>
+
+
             <input type = "hidden" name = "backval" id = "backval" value = ""/>
-            <button type="submit" id = "mybtn" class="butt" name = "btn" onclick="newnumber()"> Your Next Number is: </button>
+            <button type="button" id = "mybtn" class="butt" name = "btn" onclick="newnumber()"> Your Next Number is: </button>
             <!-- <input type="submit" value="Submit" name ="submit"> -->
             <!-- <button type="submit" class="butt"> Start Game</button> -->
         </form>
@@ -93,32 +111,22 @@ if(isset($_POST['btn']))
 
         var arr = [1, 2 ,3 ,4 ,5 ,6 ,7 ,8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
         shuffle(arr);
-        
-        // document.getElementById('clickme').onclick = doFunction();
-
-        // function doFunction(){
-        // var el = document.getElementById("clickme");
-        // if(el.addEventListener)
-        //     el.addEventListener("click", newnumber, false);
-        // else if(el.attachEvent)
-        //     el.attachEvent('onclick', newnumber);
-        // }
 
         function newnumber(){
                 var randomArr = arr;//localStorage.getItem("randomarray");
                 if(!localStorage.getItem("index"))
                 {
                     localStorage.setItem("index", 0);
-                    // document.getElementById("history").innerHTML+=randomArr[0]+", ";
+                    document.getElementById("history").innerHTML+=randomArr[0]+", ";
                     document.getElementById("number").innerHTML="Your next number is "+randomArr[0];
                     document.getElementById("backval").value = randomArr[0];
                 } else{
                     var index = parseInt(localStorage.getItem("index"));
                     index+=1;
                     if(index<=arr.length-1){
-                        //alert("index is: "+index);
+                        // alert("index is: "+index);
                         localStorage.setItem("index",index);
-                        // document.getElementById("history").innerHTML+=randomArr[index]+", ";
+                        document.getElementById("history").innerHTML+=randomArr[index]+", ";
                         document.getElementById("number").innerHTML="Your next number is "+randomArr[index];
                         document.getElementById("backval").value = randomArr[index];
                     } else{
@@ -126,6 +134,8 @@ if(isset($_POST['btn']))
                     }
                 }
             }            
+        
+
         
         // document.write("Randomized array:"+arr);
 
